@@ -1,7 +1,7 @@
 export {config} from './config';
 import * as Discord from 'discord.js';
 
-export const genEmbed = (title, desc) => new Discord.RichEmbed()
+export const genEmbed = (title, desc) => new Discord.MessageEmbed()
 	.setTitle(title)
 	.setAuthor('Another Bot', 'https://willb.info/i/822a4be1252dd25c0632e584f0d016c3')
 	.setDescription(desc)
