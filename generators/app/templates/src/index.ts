@@ -8,7 +8,6 @@
 // Import modules
 import 'source-map-support/register';
 import * as Commando from 'discord.js-commando';
-import * as Raven from 'raven';
 import {config} from './utils';
 import {basename, join} from 'path';
 import * as sqlite from 'sqlite';
@@ -16,30 +15,11 @@ import {oneLine} from 'common-tags';
 
 process.on('uncaughtException', err => {
 	console.error(err);
-	Raven.captureException(err);
 });
 
 process.on('unhandledRejection', (err: Error) => {
 	console.error(err);
-	Raven.captureException(err);
 });
-
-Raven.config(config.ravenDSN, {
-	autoBreadcrumbs: true,
-	dataCallback (data) { // source maps
-		const stacktrace = data.exception && data.exception[0].stacktrace;
-
-		if (stacktrace && stacktrace.frames) {
-			stacktrace.frames.forEach(frame => {
-				if (frame.filename.startsWith('/')) {
-					frame.filename = 'app:///' + basename(frame.filename);
-				}
-			});
-		}
-
-		return data;
-	}
-}).install();
 
 // Create an instance of a Discord client
 export const client = new Commando.Client({
@@ -89,7 +69,6 @@ client.setProvider(
 	sqlite.open(join(__dirname, 'settings.sqlite3')).then(db => new Commando.SQLiteProvider(db))
 ).catch(err => {
 	console.error(err);
-	Raven.captureException(err);
 });
 
 // The ready event is vital, it means that your bot will only start reacting to information
@@ -103,7 +82,7 @@ client.on('ready', () => {
 			// });
 		})
 		.catch(err => {
-			Raven.captureException(err);
+			console.error(err);
 		});
 });
 
@@ -115,6 +94,6 @@ client.registry
 // Log our bot in
 client.login(config.token)
 	.catch((err: Error) => {
-		Raven.captureException(err);
+		console.error(err);
 		process.exit(1);
 	});
