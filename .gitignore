@@ -131,3 +131,5 @@ typings/
 
 
 # End of https://www.gitignore.io/api/intellij,node
+
+generators/app/templates/dist

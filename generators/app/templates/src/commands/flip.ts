@@ -1,20 +1,20 @@
-
 /**
  * @module Commands
  */
 /**
  * ignore
  */
-import {config, genEmbed} from '../utils';
+import {genEmbed} from '../utils';
 import * as Commando from 'discord.js-commando';
 
 /**
  * Coin flip
  */
-const flip = () => (Math.floor(Math.random() * 2) == 0) ? 'heads' : 'tails';
+const flip = (): string =>
+	Math.floor(Math.random() * 2) == 0 ? 'heads' : 'tails';
 
 export class FlipCommand extends Commando.Command {
-	constructor(client) {
+	constructor(client: Commando.Client) {
 		super(client, {
 			name: 'flip',
 			group: 'misc',
@@ -26,16 +26,15 @@ export class FlipCommand extends Commando.Command {
 		});
 	}
 
-	hasPermission(msg) {
+	hasPermission(msg: Commando.CommandoMessage) {
 		return true;
 	}
 
-	async run(msg) {
+	async run(msg: Commando.CommandoMessage) {
 		const flipped = flip();
 		console.log(`Coin flipped by ${msg.author.tag}: ${flipped}`);
 		const embed = genEmbed('Coin Flipped', `Result: ${flipped}`);
 		embed.addField('By:', msg.author.toString());
 		return msg.channel.send({embed});
 	}
-
 }

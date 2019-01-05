@@ -1,4 +1,3 @@
-
 /**
  * @module Utils
  */
@@ -11,6 +10,5 @@ export const config: IConfig = require(confToUse);
 
 export interface IConfig {
 	token: string;
-	mongoURL: string;
 	ownerID: string[];
 }

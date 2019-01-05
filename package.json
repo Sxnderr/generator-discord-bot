@@ -8,7 +8,7 @@
     "email": "wbwilliam7@gmail.com",
     "url": "https://williamblythe.info"
   },
-  "main": "generators/index.js",
+  "main": "generators/app/index.js",
   "keywords": [
     "yeoman-generator"
   ],

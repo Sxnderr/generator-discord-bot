@@ -1,5 +1,4 @@
 {
-  "token": "",
-  "mongoURL": "",
-  "ownerID": ""
+	"token": "<%= token %>",
+	"ownerID": "<%= ownerID %>"
 }
