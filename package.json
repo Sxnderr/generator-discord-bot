@@ -33,7 +33,6 @@
     "testEnvironment": "node"
   },
   "scripts": {
-    "prepublishOnly": "nsp check"
   },
   "repository": "willyb321/generator-discord-bot",
   "license": "MIT"
